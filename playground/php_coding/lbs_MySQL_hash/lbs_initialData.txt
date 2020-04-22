@@ -1,0 +1,103 @@
+
+
+
+
+
+create table testing (
+        userId int not null auto_increment,
+        userLatitude double not null,
+        userLongitude double not null,
+        primary key(`userId`)
+);
+drop procedure if exists initialData;
+delimiter $$
+        create procedure initialData(in num int )
+        begin
+                declare rowid int default 0;
+                declare usr_ln double(7,4);
+                declare usr_la double(6,4);
+                declare pln smallint;
+                declare pla tinyint;
+
+                while rowid < num do 
+                        set pln = floor(0 + (rand() * 180));
+                        set pla = floor(0 + (rand() * 90));
+                        set usr_ln = pln + floor(0 + (rand() * 60))/60 +  floor(0 + (rand() * 60))/3600;
+                        set usr_la = pla +  floor(0 + (rand() * 60))/60 +  floor(0 + (rand() * 60))/3600;
+                        set rowid = rowid + 1;
+                        insert into testing(userId, userLatitude, userLongitude) values (rowid, usr_la, usr_ln);
+                end while;
+        end $$
+        delimiter ;
+
+        drop procedure if exists initialDataNew;
+delimiter $$
+        create procedure initialDataNew(in num int )
+        begin
+                declare rowid int default 0;
+                declare usr_ln double(7,4);
+                declare usr_la double(6,4);
+                declare pln smallint;
+                declare pla tinyint;
+                set @exedata="";
+                while rowid < num do 
+                        set pln = floor(0 + (rand() * 180));
+                        set pla = floor(0 + (rand() * 90));
+                        set usr_ln = pln + floor(0 + (rand() * 60))/60 +  floor(0 + (rand() * 60))/3600;
+                        set usr_la = pla +  floor(0 + (rand() * 60))/60 +  floor(0 + (rand() * 60))/3600;
+                        set rowid = rowid + 1;
+                        set @exedata=concat(@exedata,"(",rowid,",",usr_la,",",usr_ln,")");
+                        set @exesql =concat("insert into testing_hash(userId, userLatitude, userLongitude) values ", @exedata);
+                        prepare stmt from @exesql;
+                        execute stmt;
+                        deallocate prepare stmt;
+                        set @exedata="";
+                end while;
+        end $$
+        delimiter ;
+        
+        delete from testing;
+        call initialData(10000);
+
+        delete from testing_hash;
+        call initialDataNew(10000);
+
+
+
+delimiter $$
+CREATE  FUNCTION `GETDISTANCE`(lat1 DOUBLE, lng1 DOUBLE, lat2 DOUBLE, lng2 DOUBLE) RETURNS double
+READS SQL DATA
+DETERMINISTIC
+BEGIN
+DECLARE RAD DOUBLE;
+DECLARE EARTH_RADIUS DOUBLE DEFAULT 6378137;
+DECLARE radLat1 DOUBLE;
+DECLARE radLat2 DOUBLE;
+DECLARE radLng1 DOUBLE;
+DECLARE radLng2 DOUBLE;
+DECLARE s DOUBLE;
+SET RAD = PI() / 180.0;
+SET radLat1 = lat1 * RAD;
+SET radLat2 = lat2 * RAD;
+SET radLng1 = lng1 * RAD;
+SET radLng2 = lng2 * RAD;
+SET s = ACOS(COS(radLat1)*COS(radLat2)*COS(radLng1-radLng2)+SIN(radLat1)*SIN(radLat2))*EARTH_RADIUS;
+SET s = ROUND(s * 10000) / 10000;
+RETURN s;
+END$$
+DELIMITER ;
+
+
+
+SELECT userId,userLatitude,userLongitude,GETDISTANCE(userLatitude,userLongitude,23.3345, 56.6643)
+ AS distance FROM  testing where 1 HAVING distance<100000 ORDER BY distance ASC
+
+
+create table testing_hash (
+        userId int not null auto_increment,
+        userLatitude double not null,
+        userLongitude double not null,
+        geohash char(12) not null,
+        primary key(`userId`),
+        INDEX (`geohash`)
+);

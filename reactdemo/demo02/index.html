@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example1"></div>
+    <div id="example2"></div>
+    <script type="text/babel">
+      var names = ['Alice', 'Emily', 'Kate'];
+      var arr = [
+                <h1>bois</h1>,
+                <h2>k!</h2>
+      ];
+
+      ReactDOM.render(
+        <div>
+        {
+          names.map(function (name, index) {
+            return <div key={index}>Hello, {name}!</div>
+          })
+        }
+        </div>,
+        document.getElementById('example1')
+      );
+
+      ReactDOM.render(
+          <div>{arr}</div>,
+           document.getElementById('example2')
+      );
+    </script>
+  </body>
+</html>

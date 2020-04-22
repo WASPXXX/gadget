@@ -1,0 +1,46 @@
+
+
+
+//实例化，注意必须使用绝对URL
+var socket = new WebSocket("ws://www.wasp.com/server.php");
+/* 实例化后，浏览器就会尝试创建连接
+     没有readystatechange事件，有一个readyState属性
+     WebSocket.OPENING(0) 正在建立连接
+     WebSocket.OPEN(1)        已经建立
+     WebSocket.CLOSING(2) 正在关闭
+     WebSocket.CLOSE(3)       已经关闭 */
+//关闭连接
+socket.close();
+//发送、接受数据
+socket.send("Hello World!");
+//只能发送纯文本数据，相对复杂的数据需要先序列化
+var message = {
+          time: new Date(),
+          text: "Wasp Inc",
+          clientId: "w3d4f3329"
+
+};
+socket.send(JSON.stringify(message));
+//服务器向客户端发来消息，会触发message事件
+//返回的数据保存在event.data属性中，字符串的格式
+socket.onmesage = function() {
+          var data = event.data;
+          //...........
+};
+//其他事件：open/error/close
+$('a').click(function() {
+                    alert('单击鼠标');
+});
+
+$(document).ready(function() {
+          //init...
+});
+
+$(function() {
+          //init...
+});
+
+var jqxhr = $.get('/path/to/resource', {
+          name: 'Ryan Gosling',
+          check: 1
+});

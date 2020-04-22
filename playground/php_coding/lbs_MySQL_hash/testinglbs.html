@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+</head>
+<body>
+        <form action="testinglbs_mysql.php" method="POST">
+                <br><br><br><br>
+                MySQL/存储函数
+                <br>
+                <input type="text" name="la" id="la">纬度Latitude(正→北纬，负→南纬)<br>
+                <input type="text" name="ln" id="ln">经度Longitude（正→东经，负→西经）<br>
+                <input type="text" name="weight" id="weight">距离（m）<br>
+                <input type="submit" value="go">
+        </form>
+        <form action="testinglbs_hash.php" method="POST">
+                <br><br><br><br>
+                GeoHash编码
+                <br>
+                <input type="text" name="la" id="la">纬度Latitude(正→北纬，负→南纬)<br>
+                <input type="text" name="ln" id="ln">经度Longitude（正→东经，负→西经）<br>
+                <input type="text" name="n" id="n">geohash权重（1~9，距离递减）<br>
+                <input type="submit" value="go">
+        </form>
+</body>
+</html>

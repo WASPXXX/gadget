@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+	<head>
+		<title>Alerts, Confirm n Prompt</title>
+	</head>
+	<body>
+		<h1>Testing alert, confrim n prompt Method.</h1><hr/>
+		<p>Try the buttons below.</p>
+
+		<div style="font-style: italic; background-color: #7fffd4;">
+			<button type="button" 
+				onclick="window.alert('Alert test.');">Alert</button><br/>
+			<button type="button"
+				onclick="window.confirm('Confimr test.');">Confrim</button><br/>
+			<button type="button"
+				onclick="window.prompt('Prompt test.','wanna say sth?');">Prompt</button><br/>				
+		</div>
+		<script type="text/javascript">
+			var test = window.prompt('get prompt value','type here');
+			document.write(test);
+		</script>
+	</body>
+</html>

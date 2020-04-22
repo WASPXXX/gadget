@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+	<head>
+		<title>Positioning with jQueryUI</title>
+		<script type="text/javascript" src="./assets/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="./assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+		<style type="text/css">
+			img {
+				position: absolute;
+				width: 150px;
+				height: auto;
+			}
+			div {
+				height: 500px;
+				width: 450px;
+				border: 3px solid #000;
+			}
+		</style>
+
+		<script type="text/javascript">
+			$(document).ready( function() {
+				$("#img2").position({my:"left top", at:"right bottom", of:"#img1"});
+				$("#img3").position({my:"left top", at:"right bottom", of:"#img2"});
+				$("div").mousemove( function(e) {
+					$("#img4").position({my:"left top", at:"center", of: e, collision:"flip", within: "div"});
+					}
+					);
+				}
+				);
+		</script>
+	</head>
+	<body>
+		<h1>Positioning with jQueryUI</h1>
+		<div>
+			<img id="img1" alt="UK" src="UK.png"/>
+			<img id="img2" alt="China" src="China.png"/>
+			<img id="img3" alt="Germany" src="Germany.png"/>
+			<img id="img4" alt="Japan" src="Japan.png"/>			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+
+    <form action="upload2.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="upfile[]"><input type="button" id="addMore" value="more file" onclick=abc()><br><br>
+        <input type="file" name="upfile[]"><br><br>
+        <input type="file" name="upfile[]"><br><br>
+        <span id= "add"></span><br><br>
+    
+        <!--     <input type="text" name='username' id="username" placeholder="username">
+        <label for="username">输入用户名</label><br> -->
+        <input type="text" name="targetDir" id="targetDir" placeholder="filefolder name...">
+        <label for="another">输入目录名(留空默认上传至public文件夹)</label><br>
+        <input type="text" name="userId" id="userId" placeholder="numeric id...">
+        <label for="userId">输入用户数字ID</label><br>
+    
+    
+        <br>
+        <input type="submit" value="上传文件">
+    </form>
+
+    <hr>
+    <button><a href="../public">查看默认文件夹</a></button>
+
+    <script type="text/javascript">
+        function abc() {
+            var addButton = document.getElementById('addMore'),
+                    addArea = document.getElementById('add'),
+                    temp = document.createElement('input'),
+                    style = document.createElement('br'),
+                    stylish = document.createElement('br');
+
+            temp.setAttribute('type', 'file');
+            temp.setAttribute('name', 'upfile[]');
+            addArea.appendChild(temp);
+            addArea.appendChild(style).appendChild(stylish);
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+	<head>
+		<title>Timeout Example</title>
+		<script type="text/javascript">
+			var counter = 0;
+			//timeout_1 = window.setTimeout("counterUpdate()", 1000);
+
+			function counterUpdate() {
+				//counter++;
+				//counterInfo.innerHTML = "The counter is now " + counter;
+				var changeInfo = document.getElementById("counterInfo");
+				changeInfo.innerHTML = "The counter is now " + counter;
+				counter++;
+
+				timeout_1 = window.setTimeout("counterUpdate()", 2000);
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Timeout Example</h1><hr/>
+		<p>The counter will update every 2 secs.</p>
+		<p>Press the buttons to launch or stop this process.</p>
+
+		<p id="counterInfo">Sup, bro?</p>
+		
+		<div>
+			<button type="button" 
+				onclick="counter = 0; counterUpdate();">START/RESTART</button>
+			<button type="button"
+				onclick="window.clearTimeout(timeout_1);">STOP</button>
+		</div>
+	</body>
+</html>

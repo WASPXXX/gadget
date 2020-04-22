@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example1"></div>
+    <script type="text/babel">
+      var HelloMessage = React.createClass({
+        render: function() {
+          return <h1>
+            Hello {this.props.name} <br/>you can't be a {this.props.job}?
+          </h1>;
+        }
+      });
+
+      ReactDOM.render(
+        <HelloMessage name="John" job="cop" />,
+        document.getElementById('example1')
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+	<head>
+		<title>Hiding or Showing Objects using js func and STUFF</title>
+		<script type="text/javascript">
+		function showHide() {
+			if(!document.getElementById) return;
+
+			var heading1 = document.getElementById("heading1");
+			var heading2 = document.getElementById("heading2");
+			var headingDisplay1 = checkboxform.checkbox1.checked;
+			var headingDisplay2 = checkboxform.checkbox2.checked;
+			heading1.style.visibility = (headingDisplay1) ? "visible" : "hidden";
+			heading2.style.visibility = (headingDisplay2) ? "visible" : "hidden";
+
+			// heading1.firstChild.nodeValue = "Fuking A";				 
+		}
+
+		function changeHeading() {
+			if(!document.getElementById) return;
+
+			var heading1 = document.getElementById("heading1");
+			var heading2 = document.getElementById("heading2");
+			newline = document.checkboxform.inputline.value;
+			heading1.firstChild.nodeValue = newline;
+			heading2.firstChild.nodeValue = newline;
+			document.checkboxform.inputline.value = "";
+
+			names = "Hello, Rose.";
+			//document.write(names);
+		}
+		// document.write(names.sort());
+		</script>
+	</head>
+	<body>
+		<h1 id="heading1">I'm Heading 1</h1>
+		<h1 id="heading2">I'm Heading 2</h1>
+		<p>Using checkboxes below to show or hide the two headings.</p>
+
+		<form name="checkboxform">
+			<input type="checkbox" name="checkbox1"
+				onclick="showHide();" checked="checked"/>
+				<span style="font-weight:bold">Show heading 1.</span><br/>
+			<input type="checkbox" name="checkbox2"
+				onclick="showHide();" checked="checked"/>
+				<span style="font-weight:bold">Show heading 2.</span><br/><br/>
+			<input type="text" name="inputline" size="40" value="Type new title here..."/><br/>
+				<button type="button" onclick="inputline.size='20';">Shorter</button>
+				<button type="button" onclick="inputline.size='60';">Longer</button><br/>
+				<button type="button" onclick="changeHeading();">Change Headings!</button>
+		</form>
+		<hr/>
+		<p>
+			<script type="text/javascript">
+			var hello = "Hello, Lil Jack. Been a lonnnng time.";
+			document.write(hello + "<br/>");
+			document.write("length of the string above: " + hello.length);
+			document.write(" and the first letter is: " + hello.substring(0,1) + "<br/><br/>");
+			a = new Array(4);
+			a[0] = "Jack Dawson";
+			a[1] = "Rose Dawson"
+			a[2] = "Lisbeth Salander";
+			a[3] = "Ashley";
+			document.write("Here are some names:<br/>" + a+"<br/>");
+			document.write("Let's sort it:<br/>" + a.sort() + "<br/>");		
+			</script>
+		</p>
+	</body>
+</html>

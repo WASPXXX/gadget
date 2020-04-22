@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+	<head>
+		<title>Gimme quotes</title>
+		<script type="text/javascript">
+		<!-- hide the script from the old browsers
+		function getQuote() {
+			//创建数组
+			quotes = new Array(4);
+			sources = new Array(4);
+			//数据
+			quotes[0] = "When I was a boy of 14, my father was so ignorant...but when I got to be 21, I was astonished at how much he had learned in 7 years.";
+			sources[0] = "Mark Twain";
+
+			quotes[1] = "Everybody is ignorant. Only on different subjects.";
+			sources[1] = "Will Rogers";
+
+			quotes[2] = "They say such nice things about people at their funerals that it makes me sad that I'm going to miss mine by just a few days."
+			sources[2] = "Garrison Keillor";
+
+			quotes[3] = "What's another word for thesaurus?";
+			sources[3] = "Steven Wright";
+			//生成随机数
+			i = Math.floor(Math.random()*quotes.length);
+			//输出
+			document.write("<p style='background-color: #ffb6c1'>\"");
+			document.write(quotes[i] + "\"");
+			document.write("<em>- " + sources[i] + "</em>");
+			document.write("</p>");
+		}
+		//stop hiding the script -->
+		</script>
+	</head>
+	<body>
+		<h1>Gimme quotes</h1>
+		<img 
+			id = "flags"
+			style = "border: 5px solid black; margin-top: 15px;"
+			src= "USA.png"
+			alt = "USA nation" />
+		<p>
+			<a href="#" 
+				//点击后根据切换国旗文件源 并且 取消边框样式
+				onclick="javascript:document.images['flags'].src='Japan.png'; javascript:document.images['flags'].style.border='none' ">
+			<img 
+				style = "border: 5px solid black;margin-top: 5px;"
+				src="China.png" 
+				alt="CN flag"/></a>
+		点击CN国旗将JP国旗切换为US国旗。
+		</p>
+		<script type="text/javascript">
+		<!-- hiding script from old browsers
+			getQuote();
+			//stop hiding -->
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+	<head>
+		<title>Display the Last Modified Date</title>
+	</head>
+	<body>
+		<h1>Display the Last Modified Date</h1>
+		<p>This page was last modified on: <br/>
+			<script type="text/javascript">
+			// document.write(document.lastModified);
+			document.write(window.history.length);
+			</script>
+		</p>
+		<!-- <div style="display:none"> -->
+		<div>
+			<button type="button"
+				onclick="history.back();">Go Back<br/></button>
+			<button type="button"
+				onclick="history.forward()">Go Forward</button>
+		</div>
+	</body>
+</html>

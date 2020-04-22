@@ -1,0 +1,176 @@
+<!-- 
+        功能;
+                对所选择图片的预览
+                和对需要进行压缩的图片进行压缩处理并显示
+        待改进：
+                图片的压缩算法模块待优化
+                用基于base64的DataURL处理图片，未实现对于压缩后的图片的大小再次判断，需要修改
+ -->
+
+
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+         <meta name="description" content="nah">
+         <meta name="author" content="wasp">
+         <title>👽  图像预览与压缩</title>
+         <style>
+                 #image_preview, #image_compressed {
+                         border: 1px solid #ccc;
+                         width: 80%;
+                         text-align: center;
+                         margin: 0 auto;
+                         padding: 5px;
+                         display: flex;
+                         flex-wrap: wrap;
+                         justify-content: space-around;
+                         align-items: flex-start;
+                         align-content: space-around;
+                 } 
+                 #image_table {
+                         width: 80%;
+                         margin: 0 auto;
+                 }
+                 table,th,td {
+                        width: 40%;
+                        margin: 0 auto;
+                        border: 1px solid black;
+                        border-collapse:collapse;
+                        text-align: center;
+                 }
+                 img {
+                         width: 30%;
+                         padding: 5px;
+                 }
+         </style>
+ </head>
+
+ <body>
+         <header>
+                 <h1 style="text-align: right">图片预览与压缩</h1>
+                 <hr>
+         </header>
+
+         <div>
+                <label for="file">选择目标图片文件（可多选）</label><br/>
+                <input type="file" name="imageUpload" id="imageUploader" accept= "image/png, image/jpeg" multiple><br/><br/>
+                
+                <h3 style="text-align: center; text-transform: uppercase">Preview</h3>
+                
+                <div id="image_preview"></div>
+                
+                <div id="image_table">
+                        <h3 style="text-align:center">已选图片信息</h3>
+                        <table id="image_info">
+                                <thead>
+                                        <th>Name</th>
+                                        <th>Size</th>
+                                        <th>Type</th>
+                                </thead>
+                                <tbody id = "image_item"></tbody>
+                        </table>
+                </div>
+                
+                <h3 style="text-align:center; text-transform: uppercase">compressed</h3>
+                
+                <div id="image_compressed"></div>
+
+                <script type="text/javascript">
+                        var
+                                targetImage = document.getElementById('imageUploader'),
+                                info = document.getElementById('image_info'),
+                                preview = document.getElementById('image_preview'),
+                                after = document.getElementById('image_compressed');
+                        var final = '???'; 
+                                
+                        function imageCompress(imgBase64, ratio) {       //利用Canvas进行图像压缩
+                                var temp = new Image(),
+                                       canvas,
+                                       ctx;
+                                       temp.onload = function() {
+                                               canvas = document.createElement('canvas');
+                                               ctx = canvas.getContext('2d');
+                                                canvas.width = temp.width/5;
+                                                canvas.height = temp.height/5;    
+                                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                                ctx.drawImage(temp, 0, 0, canvas.width, canvas.height);
+                                                final = canvas.toDataURL('image/jpeg', ratio);  
+                                                updateCompressed(final);
+                                        };
+                                        temp.src = imgBase64;
+                                }
+                        function abs() {}
+/*                         function reroll(imgBase64, ratio) {
+                                const x = 1024 * 1024;
+                                var temp = new Image();
+                                temp.onload = function() {
+                                        do {
+                                                imageCompress(imgBase64, ratio);
+                                        } 
+                                        while( temp.size > 2 * x);
+                                        temp.src = imgBase64;
+                                }
+                        }
+                         */
+
+                        function byteToMb(filesize) {           
+                                const x = 1024 * 1024;
+                                return (filesize/x).toFixed(2);
+                                }
+
+                        function updateTable(data) {    //更新图片信息表格
+                                var tr = document.createElement('tr');
+                                tr.innerHTML = '<td>' + data.name + '</td><td>' + byteToMb(data.size) + 'MB'+ '</td><td>' + data.type + '</td>';
+                                document.getElementById('image_item').appendChild(tr);
+                                }
+
+                        function updatePreview(data) {          //更新图片预览部分
+                                var img = document.createElement('img');
+                                img.setAttribute('src', data);
+                                preview.appendChild(img);
+                                }
+
+                        function updateCompressed(data) {               //输出压缩后的图片
+                                var img = document.createElement('img');
+                                img.setAttribute('src', data);
+                                //img.setAttribute('style', 'wid')
+                                after.appendChild(img);
+                        }
+                        
+                        targetImage.addEventListener('change', function() { 
+                                preview.innerHTML = '';              
+                                document.getElementById('image_item').innerHTML = '';
+                                after.innerHTML = '';
+
+                                for(let image of targetImage.files) {           //利用files对象和FileReader对象处理、读取图片
+                                        var fileFormat = image.name.substring(image.name.lastIndexOf('.')).toLowerCase();
+                                        if(!fileFormat.match(/.png|.jpg|.jpeg/)) {
+                                                alert('图片格式错误，支持png/jpg/jpeg');
+                                                return;
+                                        } else {
+                                                updateTable(image);
+                                        }
+                                        imageReader = new FileReader();
+                                        imageReader.onload = function(e) {         
+                                                var data = e.target.result;
+                                                var std = 1024 * 1024;
+                                                updatePreview(data); 
+                                                if(image.size >= 2 * std) {
+                                                        imageCompress(data, 0.9);  
+                                                } else {
+                                                        return;
+                                                }
+                                        }
+                                        imageReader.readAsDataURL(image);  
+                                }
+                        });
+                </script>
+        </div>
+        <hr>
+        <footer></footer>
+</body>
+</html>
+<!--  -->

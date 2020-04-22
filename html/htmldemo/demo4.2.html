@@ -1,0 +1,29 @@
+<!DOCTYPE  html>
+<html lang = "en">
+	<head>
+		<title>Event Test</title>
+	</head>
+	<body>
+		<h1>Event Test</h1>
+		<button type = "button"
+	                		onclick="alert('You clicked  THE button!')">
+	                		Click Me:)</button>
+	                <script type="text/javascript">
+	                	now = new Date();
+	                	localtime = now.toString();
+	                	utctime = now.toGMTString();
+	                	document.write("<p><strong>Local Time:</strong>" + localtime +"</p>");
+	                	document.write("<p><strong>UTC time:</strong>" + utctime + "</p>");
+	                	hours = now.getHours();
+	                	mins = now.getMinutes();
+	                	secs = now.getSeconds();
+	                	document.write("<p><strong>");
+	                	document.write(hours + ":" + mins + ":" + secs);
+	                	document.write("</p></strong>");
+
+	                	document.write("<h2>");
+	                	document.write(hours + ":" + mins + ":" + secs);
+	                	document.write("</h2>");
+	                </script>
+	</body>
+<html>	

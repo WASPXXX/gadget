@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+	<head>
+		<title>Displaying Live Keypresses</title>
+		<script type="text/javascript">
+			function displayKey(e) {
+				//找到被按下的键
+				if(e.keyCode) {
+					var keycode = e.keyCode;
+				}
+				else {
+					var keycode = e.which;
+				}
+				characterform = String.fromCharCode(keycode);
+				
+				//通过id找到目标输出位置 然后通过innerHTML属性完成输出
+				var keys_output = document.getElementById('keys');
+				keys_output.innerHTML += characterform;
+			}
+		</script>
+	</head>
+	<body onkeypress="displayKey(event)" onload="alert('Begin to type!')">
+		<h1>Live Display Typed Characters</h1>
+		<hr/>
+		<p>(!)This page includes a simple script that displaies the keys you type as a new paragraph below.<br/><em>Go ahead and try it.</em></p>
+		<p>------------------------</p>
+		<p id="keys"></p>
+	</body>
+</html>
